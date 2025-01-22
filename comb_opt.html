@@ -50,7 +50,7 @@
         }
 
         .layer1 {
-            background: url('https://raw.githubusercontent.com/noahc112/website/main/blob.svg') no-repeat center center;
+            background: url(/blob.svg);
             background-size: cover; /* Cover the full viewport */
             background-position: center;
             min-height: 100vh; /* Ensure section fills at least 100% of viewport height */
@@ -109,9 +109,8 @@
         }
 
         img {
-            max-width: 400px;
+            max-width: 1000px;
             height: auto;
-            border-radius: 8px;
         }
 
         .content-wrapper {
@@ -305,19 +304,32 @@
         </div>
 
         <div class="images-container">
-            <a href="contact.html"><img src="com_opt_plot.png" alt="Image 1"></a>
+            <a><img src=url('https://raw.githubusercontent.com/noahc112/website/main/AMERICANED_MIDDLETOWN_137.jpg') alt="Image 1"></a>
         </div>
 
         <main class="about-main">
-            <strong>Out of 317,520 possible paths, only 6 minimize distance traveled equally.</strong>
-            The vehicle routing problem defines n sites carrying an inventory that must be delivered back to the start point. 
-            In this rendition of the problem, 7 sites with a random inventory between 1 and 10 were placed randomly on a 100 by 100 grid.  
         </main>
-        
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+              fetch("com_essay.html") // Load com_essay.html
+                .then(response => response.text())
+                .then(data => {
+                  document.querySelector(".about-main").innerHTML = data; // Insert into <main>
+                })
+                .catch(error => console.error("Error loading essay:", error));
+            });
+          </script>
+
     </div>
 </section>
 
 
+<section class="layer1">
+</section>
+<section class="layer1">
+</section>
+<section class="layer1">
+</section>
 <section class="layer1">
 </section>
 
