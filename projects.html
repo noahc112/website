@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrollable Container</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background: #efefef;
+            overflow-x: hidden;
+            height: 100vh; /* Ensure full height */
+            transition: overflow 0.3s ease;
+        }
+
+        /* Navbar styling */
+        nav {
+            background-color: transparent;
+            padding: 10px 20px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: right;
+            margin-right: 3vw;
+            margin-top: 1vw;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.2em;
+            font-weight: 500;
+        }
+
+        .scroll-container {
+            overflow-y: auto;
+            height: 100vh; /* Match viewport height */
+        }
+
+        #projects .container {
+            margin-top: -100px; /* Move the container 20px up */
+        }
+
+        section {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Align items to the left */
+            justify-content: center; /* Center vertically */
+            min-height: 100vh;
+            padding: 0 10vw;
+            margin: 0;
+        }
+
+        .layer1 {
+            background-image: url(/blob.svg);
+            background-size: cover; /* Cover the full viewport */
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh; /* Ensure section fills at least 100% of viewport height */
+            background-size: 200%;
+        }
+
+        h1 {
+            color: black;
+            font-size: 10vw;
+            line-height: 1.0;
+            font-weight: 450;
+        }
+
+        p {
+            font-size: 1.25em;
+            font-weight: 400;
+            color: black; /* Darker text for better contrast */
+            line-height: 1.4;
+        }
+
+        h2 {
+            color: black;
+            font-size: 2vw;
+            line-height: 1.0;
+            position: absolute;
+            top: 0vw;
+            left: 3vw;
+            font-weight: 450;
+        }
+
+        .text p {
+            color: black;
+            white-space: nowrap;
+            margin-top: 0%;
+        }
+
+        .text span {
+            display: inline-block;
+            font-size: 1em;
+            transform-origin: 50% 50%;
+        }
+
+        .text {
+            font-size: 7.5em;
+            font-weight: 500;
+            letter-spacing: 0px;
+            font-family: 'Roboto', sans-serif;
+            white-space: nowrap;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+        .image-container {
+            display: flex; /* Arrange items horizontally */
+            align-items: center; /* Center vertically */
+            justify-content: space-between; /* Add spacing between image and text */
+            gap: 2em; /* Optional: Adjust spacing between elements */
+            flex-direction: row-reverse;
+        }
+
+        .image-wrapper {
+            flex: 1; /* Adjust image size relative to container */
+            display: flex;
+            justify-content: center; /* Center image horizontally */
+        }
+
+        .section-image {
+            max-width: 80%; /* Ensure the image scales responsively */
+            height: auto; /* Maintain aspect ratio */
+        }
+
+        .text-rectangle {
+            flex: 1; /* Adjust text box size relative to container */
+            background-color: transparent;
+            padding: 50px;
+        }
+
+        .text-rectangle p {
+            font-size: 1.25em;
+            font-weight: 400;
+            color: black; /* Darker text for better contrast */
+            line-height: 1.4;
+        }
+
+        .text-rectangle strong {
+            font-size: 4em;
+            color: black;
+            font-weight: 450;
+        }
+
+        section#project figure {
+            display: flex; /* Use Flexbox for centering */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically if needed */
+            margin: 80px 0; /* Add optional spacing around the figure */
+        }
+
+        .project-image {
+            max-width: 60%; /* Ensure the image is responsive */
+            height: auto; /* Maintain aspect ratio */
+        }
+
+        #project h1 {
+            margin-bottom: 50px; /* Adjusts space between heading and paragraph */
+        }
+
+        #project p {
+            margin-top: 0; /* Removes any default top margin */
+            margin-bottom: 20px; /* Optionally adjust space between the paragraph and the image */
+        }
+
+
+        /* Main container to hold filter and blog posts side by side */
+        .main-container {
+            display: flex; /* Use flexbox for layout */
+            margin-top: 0px; /* Remove margin to move the container up */
+            position: sticky;
+        }
+
+        /* Adjust the filter container */
+        .filter-container {
+            width: 200px;
+            text-align: left;
+            margin-left: 12px;
+            margin-top: 10vh;
+            align-items: flex-start; 
+            position: sticky;
+        }
+
+        .filter-buttons {
+            display: flex;
+            flex-direction: column; /* Stack the rows vertically */
+            gap: 10px; /* Space between the rows */
+            align-items: flex-start; 
+            position: sticky;
+            flex-wrap: wrap;
+        }
+
+        .filter-container h3 {
+            margin-bottom: 10px; /* Adjust the value as needed for desired spacing */
+            margin-top: 20px;
+            font-size: 15px; /* Larger font size */
+            font-weight: 400;
+            position: sticky;
+        }
+
+        .filter-btn-container {
+            display: flex; /* Arrange buttons in each row */
+            justify-content: flex-start;
+            justify-content: left;
+            gap: 10px; /* Space between buttons in the same row */
+            position: sticky;
+        }
+
+        .filter-btn {
+            background-color: transparent;
+            border: transparent;
+            color: #820882;
+            cursor: pointer;
+            font-size: 20px; /* Larger font size */
+            font-weight: 100;
+        }
+
+        .filter-btn:hover {
+            color: red; /* Change text color to the original background color */
+        }
+
+        .filter-btn.active {
+            color: red; /* Change text color to the original background color */
+        }
+
+
+        .blog-posts-container {
+            flex-grow: 1; /* Allow blog posts to take remaining space */
+            display: flex;
+            flex-direction: column; /* Stack the articles vertically */
+            gap: 5px; /* Adds space between each article */
+            max-width: 60%;
+            margin: 0 auto; 
+            box-sizing: border-box;
+            position: sticky;
+        }
+
+        .blog-post {
+            padding: 20px;
+            background-color: transparent;
+            cursor: pointer; 
+            justify-content: center;
+            position: sticky;
+        }
+
+        .blog-post h3 {
+            color: #820882;
+            font-size: 40px; /* Adjust the font size as needed */
+            font-weight: 500; /* Adjust the font weight as needed */
+            margin-top: 5px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+
+        .blog-post p {
+            font-size: 1.25em;
+            font-weight: 400;
+            color: #820882;
+            line-height: 1.5; /* Optional: Adjust line height for readability */
+            margin: 10px 0; /* Optional: Add margin for spacing */
+            margin-bottom: 20px;
+        }
+
+        .blog-post p1 {
+            color: #820882;
+            font-size: 15px; /* Change to your desired font size */
+            line-height: 1.5; /* Optional: Adjust line height for readability */
+            margin: 10px 0; /* Optional: Add margin for spacing */
+        }
+
+
+        .sort-buttons {
+            display: flex; /* Use flexbox for layout */
+            margin-bottom: 0px; /* Space below the sort buttons */
+            align-items: left;
+            position: sticky;
+        }
+
+        /* Ensure the sort buttons are not hidden */
+        .sort-btn {
+            padding: 0px 5px; /* Padding for the buttons */
+            background-color: transparent; /* Background color */
+            color: #820882;
+            cursor: pointer; /* Pointer cursor */
+            border: none;
+            font-size: 20px;
+            align-items: left;
+            position: sticky;
+        }
+
+
+        .sort-btn.active {
+            background-color: black; /* Background color on hover */
+            color: white; /* Text color on hover */
+        }
+
+
+
+        @media screen and (max-width: 768px) {
+            .text {
+                font-size: 5em; /* Smaller font size for tablets */
+            }
+
+            .layer1 {
+                background-image: none;
+                background-size: 500%;
+                background-repeat: no-repeat;
+                background-position: center;
+                background-attachment: fixed;
+            }
+            body {
+                overflow-x: hidden;
+            }
+
+            nav ul li a {
+                color: #820882;
+            }
+
+            .blog-posts-container {
+                flex-grow: 1; /* Allow blog posts to take remaining space */
+                display: flex;
+                flex-direction: column; /* Stack the articles vertically */
+                gap: 10px; /* Adds space between each article */
+                max-width: 100%;
+                box-sizing: border-box;
+            }
+
+            .blog-post {
+                padding: 0px;
+                background-color: transparent;
+                cursor: pointer; 
+                justify-content: center;
+            }
+
+            .blog-post h3 {
+                font-size: 40px; /* Adjust the font size as needed */
+                font-weight: 400; /* Adjust the font weight as needed */
+                margin-top: 5px;
+                margin-bottom: 20px;
+                justify-content: center;
+            }
+
+            .blog-post p {
+                font-size: 18px; /* Change to your desired font size */
+                font-weight: 400;
+                line-height: 1.5; /* Optional: Adjust line height for readability */
+                margin-bottom: 20px;
+            }
+
+            .blog-post p1 {
+                font-size: 15px; /* Change to your desired font size */
+                line-height: 1.5; /* Optional: Adjust line height for readability */
+            }
+
+            .filter-btn {
+                background-color: transparent;
+                border: transparent;
+                color: black;
+                cursor: pointer;
+                font-size: 20px; /* Larger font size */
+                font-weight: 400;
+            }
+
+
+            .filter-btn-container {
+                gap: 0px; /* Space between buttons in the same row */
+                margin-left: -15px;
+            }
+
+            .filter-buttons {
+                margin-left: -18px;
+                margin-bottom: 20px;
+            }
+
+        }
+
+        /* Media query for mobile screens */
+        @media screen and (max-width: 480px) {
+            .text {
+                font-size: 4em; /* Even smaller font size for mobile */
+            }
+            .layer1 {
+                background-image: none;
+                background-size: 500%;
+                background-repeat: no-repeat;
+                background-position: center;
+                background-attachment: fixed;
+            }
+
+            body {
+                overflow-x: hidden;
+            }
+
+            nav ul li a {
+                color: #820882;
+            }
+
+            .blog-posts-container {
+                flex-grow: 1; /* Allow blog posts to take remaining space */
+                display: flex;
+                flex-direction: column; /* Stack the articles vertically */
+                gap: 10px; /* Adds space between each article */
+                max-width: 100%;
+                box-sizing: border-box;
+            }
+
+            .blog-post {
+                padding: 0px;
+                background-color: transparent;
+                cursor: pointer; 
+                justify-content: center;
+            }
+
+            .blog-post h3 {
+                font-size: 40px; /* Adjust the font size as needed */
+                font-weight: 400; /* Adjust the font weight as needed */
+                margin-top: 5px;
+                margin-bottom: 20px;
+                justify-content: center;
+            }
+
+            .blog-post p {
+                font-size: 18px; /* Change to your desired font size */
+                font-weight: 400;
+                line-height: 1.5; /* Optional: Adjust line height for readability */
+                margin-bottom: 20px;
+            }
+
+            .blog-post p1 {
+                font-size: 15px; /* Change to your desired font size */
+                line-height: 1.5; /* Optional: Adjust line height for readability */
+            }
+
+            .filter-btn {
+                background-color: transparent;
+                border: transparent;
+                color: black;
+                cursor: pointer;
+                font-size: 20px; /* Larger font size */
+                font-weight: 400;
+            }
+
+
+            .filter-btn-container {
+                gap: 0px; /* Space between buttons in the same row */
+                margin-left: -15px;
+            }
+
+            .filter-buttons {
+                margin-left: -18px;
+                margin-bottom: 20px;
+            }
+        }
+    
+
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <ul>
+            <li><a href="index.html">Index</a></li> <!-- Updated to trigger reload -->
+            <li><a href="projects.html">Projects</a></li>
+            <!-- <li><a href="projects.html">Writing</a></li> -->
+             <!-- <li><a href="projects.html">Personal</a></li> -->
+        </ul>
+    </nav>
+    
+    <section class="layer1" id="projects">
+        <div class="main-container">
+            <!-- Filter Buttons -->
+            
+    
+            <!-- Blog Posts -->
+            <div class="blog-posts-container">
+
+                <div class="filter-container">
+
+                    <h3></h3>
+                    <div class="filter-buttons">
+                        <div class="sort-buttons">
+                            <button id="sortToggleBtn" class="sort-btn" data-sort="newest">Newest</button>
+                        </div>
+                        <div class="filter-btn-container">
+                            <button class="filter-btn active" data-filter="all">All</button>
+                            <button class="filter-btn" data-filter="technology">Technology</button>
+                            <button class="filter-btn" data-filter="finance">Finance</button>
+                        </div>
+                        <div class="filter-btn-container">
+                            <button class="filter-btn" data-filter="design">Design</button>
+                            <button class="filter-btn" data-filter="policy">Policy</button>
+                        </div>
+                        
+                    </div>
+    
+                </div>
+                
+                <div class="posts">
+    
+                    <a href="comb_opt.html" class="blog-post-link">
+                        <div class="blog-post" data-category="design" data-date="2024-10-22" data-link="comb_opt.html">
+                            <p1 class="post-date">October 22, 2024</p1>
+                            <h3>Optimize It!</h3>
+                            <p>Out of 317,520 possible paths, only 6 minimize distance traveled equally.
+                                The vehicle routing problem defines n sites carrying an inventory that must be delivered back to the start point. 
+                                In this rendition of the problem, 7 sites with a random inventory between 1 and 10 were placed randomly on a 100 by 100 grid.  </p>
+                        </div>
+                    </a>
+    
+                
+                    <div class="blog-post" data-category="employment" data-date="2024-09-15">
+                        <p1 class="post-date">September 15, 2024</p1> 
+                        <h3>Remote Work and Employment</h3>
+                        <p>Employment trends in 2024 reveal a complex landscape as companies implement return-to-office mandates while grappling with labor strikes for better working conditions. 
+                            Workers increasingly demand flexibility and fair wages, leading to a shift in employer-employee dynamics. 
+                            These factors will shape the future of the job market significantly.</p>
+                    </div>
+                
+                    <div class="blog-post" data-category="design" data-date="2024-10-01">
+                        <p1 class="post-date">October 1, 2024</p1>
+                        <h3>Modern Design Techniques</h3>
+                        <p>This article delves into modern design techniques, focusing on Jonathan Ive's innovative contributions. 
+                            Known for his minimalist aesthetics and user-centric approach, Ive has redefined product design at Apple. 
+                            His influence is evident in the seamless integration of form and function, pushing the boundaries of design while prioritizing the user experience.</p>
+                    </div>
+                
+                    <div class="blog-post" data-category="technology" data-date="2024-10-10">
+                        <p1 class="post-date">October 10, 2024</p1>
+                        <h3>AI Revolution in Technology</h3>
+                        <p>The AI revolution is transforming sectors such as transportation, healthcare, and defense. 
+                            Smart routing and autonomous vehicles enhance safety and efficiency in transportation. 
+                            Healthcare benefits from AI through streamlined diagnostics and personalized treatment plans. 
+                            Decision-making is improved in defense, with AI enhancing cybersecurity and ensuring more effective responses to emerging threats.</p>
+                        
+                    </div>
+                
+                    <!-- <div class="blog-post" data-category="policy" data-date="2024-08-30">
+                        <p1 class="post-date">August 30, 2024</p1>
+                        <h3>Lower Interest Rates to Support Economic Growth</h3>
+                        <p>At the September 2024 FOMC meeting, the Federal Reserve cut interest rates by 50 basis points, marking its first easing in four years. 
+                            This decision aims to bolster growth amid a slowing labor market, with expectations of further cuts to support maximum employment and economic stability.</p>
+                        
+                    </div> -->
+                    
+                </div>
+                
+            </div>        
+            
+        </div>
+    
+    </section>
+    
+    <!-- JavaScript inclusion -->
+    <script src="script.js"></script>
+</body>
+
+
+    </div>
+</body>
+</html>

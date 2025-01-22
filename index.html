@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrollable Container</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background: #efefef;
+            overflow-x: hidden;
+            height: 100vh; /* Ensure full height */
+            transition: overflow 0.3s ease;
+        }
+
+        /* Navbar styling */
+        nav {
+            background-color: transparent;
+            padding: 10px 20px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: right;
+            margin-right: 3vw;
+            margin-top: 1vw;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.2em;
+            font-weight: 500;
+        }
+
+        .scroll-container {
+            overflow-y: auto;
+            height: 100vh; /* Match viewport height */
+        }
+
+        #projects .container {
+            margin-top: -100px; /* Move the container 20px up */
+        }
+
+        section {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Align items to the left */
+            justify-content: center; /* Center vertically */
+            min-height: 100vh;
+            padding: 0 10vw;
+            margin: 0;
+        }
+
+        .layer1 {
+            background-image: url(/blob.svg);
+            background-size: 200%;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        h1 {
+            color: #820882;
+            font-size: 10vw;
+            line-height: 1.0;
+            font-weight: 450;
+        }
+
+        p {
+            font-size: 1.25em;
+            font-weight: 400;
+            color: #820882; /* Darker text for better contrast */
+            line-height: 1.4;
+        }
+
+        h2 {
+            color: #820882;
+            font-size: 2vw;
+            line-height: 1.0;
+            position: absolute;
+            top: 0vw;
+            left: 3vw;
+            font-weight: 450;
+        }
+
+        .text p {
+            color: #820882;
+            white-space: nowrap;
+            margin-top: 0%;
+        }
+
+        .text span {
+            display: inline-block;
+            font-size: 1em;
+            transform-origin: 50% 50%;
+        }
+
+        .text {
+            font-size: 7.5em;
+            font-weight: 500;
+            letter-spacing: 0px;
+            font-family: 'Roboto', sans-serif;
+            white-space: nowrap;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        @media screen and (max-width: 768px) {
+            .text {
+                font-size: 5em; /* Smaller font size for tablets */
+            }
+            .layer1 {
+                background-image: none;
+                background-size: 500%;
+                background-repeat: no-repeat;
+                background-position: center;
+                background-attachment: fixed;
+            }
+            .text-rectangle {
+                flex: 1; /* Adjust text box size relative to container */
+                background-color: transparent;
+            }
+        }
+
+        /* Media query for mobile screens */
+        @media screen and (max-width: 480px) {
+            .text {
+                font-size: 4em; /* Even smaller font size for mobile */
+            }
+            .layer1 {
+                background-image: none;
+                background-size: 500%;
+                background-repeat: no-repeat;
+                background-position: center;
+                background-attachment: fixed;
+            }
+            .text-rectangle {
+                flex: 1; /* Adjust text box size relative to container */
+                background-color: transparent;
+            }
+        }
+
+        .image-container {
+            display: flex; /* Arrange items horizontally */
+            align-items: center; /* Center vertically */
+            justify-content: space-between; /* Add spacing between image and text */
+            gap: 2em; /* Optional: Adjust spacing between elements */
+            flex-direction: row-reverse;
+        }
+
+        .image-wrapper {
+            flex: 1; /* Adjust image size relative to container */
+            display: flex;
+            justify-content: center; /* Center image horizontally */
+        }
+
+        .section-image {
+            max-width: 80%; /* Ensure the image scales responsively */
+            height: auto; /* Maintain aspect ratio */
+        }
+
+        .text-rectangle {
+            flex: 1; /* Adjust text box size relative to container */
+            background-color: transparent;
+            padding: 50px;
+        }
+
+        .text-rectangle p {
+            font-size: 1.25em;
+            font-weight: 400;
+            color: #820882; /* Darker text for better contrast */
+            line-height: 1.4;
+        }
+
+        .text-rectangle strong {
+            font-size: 4em;
+            color: #820882;
+            font-weight: 450;
+        }
+
+
+        .project-image {
+            max-width: 60%; /* Ensure the image is responsive */
+            height: auto; /* Maintain aspect ratio */
+        }
+
+        @media screen and (max-width: 768px) {
+            .image-container {
+                flex-direction: column; /* Stack image and text vertically on smaller screens */
+            }
+
+            .section-image {
+                max-width: 90%; /* Adjust image width for smaller screens */
+            }
+
+            .text-rectangle {
+                width: 100%; /* Adjust text box width for smaller screens */
+                padding: 15px;
+            }
+
+            .text-rectangle p {
+                font-size: 1.25em;
+            }
+
+            .text-rectangle strong {
+                font-size: 2.0em;
+            }
+            nav ul li a {
+                color: #820882;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .image-container {
+                flex-direction: column; /* Stack image and text vertically on smaller screens */
+            }
+
+            .section-image {
+                max-width: 90%; /* Adjust image width for smaller screens */
+            }
+
+            .text-rectangle {
+                width: 100%; /* Adjust text box width for smaller screens */
+                padding: 15px;
+            }
+
+            .text-rectangle p {
+                font-size: 1.25em;
+            }
+
+            .text-rectangle strong {
+                font-size: 2.0em;
+            }
+
+            nav ul li a {
+                color: #820882;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <ul>
+            <li><a href="#" id="index-link">Index</a></li> <!-- Updated to trigger reload -->
+            <li><a href="projects.html">Projects</a></li>
+            <!-- <li><a href="projects.html">Writing</a></li> -->
+             <!-- <li><a href="projects.html">Personal</a></li> -->
+        </ul>
+    </nav>
+
+    <div class="scroll-container">
+        <section class="layer1" id="projects">
+            <div class="container">
+                <p class="text" id="first"></p>
+                <p class="text" id="second"></p>
+            </div>
+
+            <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+            <script>
+                var typed1 = new Typed("#first", {
+                    strings: ["Noah's"],
+                    typeSpeed: 100,  // Slower typing speed
+                    loop: false,
+                    cursorChar: '', // Remove the blinking cursor
+                    onComplete: function() {
+                        // Disable scrolling when the "Think" text is typed
+                        document.body.style.overflow = 'hidden';
+
+                        // After 'Think' is typed, start typing 'Differently'
+                        var typed2 = new Typed("#second", {
+                            strings: ["Website."],
+                            typeSpeed: 100,  // Slower typing speed
+                            loop: false,
+                            cursorChar: '', // Remove the blinking cursor
+                            onComplete: function() {
+                                // Allow scrolling again after the typing is complete
+                                document.body.style.overflow = 'auto';
+
+                                // Scroll to the next section after the typing is complete
+                                document.querySelector('section:nth-of-type(2)').scrollIntoView({
+                                    behavior: 'smooth', 
+                                    block: 'start'
+                                });
+                            }
+                        });
+                    }
+                });
+
+                // Reload the page when the Index link is clicked
+                document.getElementById("index-link").addEventListener("click", function(event) {
+                    event.preventDefault();
+                    location.reload();  // This reloads the page
+                });
+            </script>
+        </section>
+
+        <section class="layer1" id="writing">
+            <div class="image-container">
+                <figure class="image-wrapper image1-wrapper">
+                    <!-- <img src="self.jpg" alt="Image 1" class="section-image image1"> -->
+                </figure>
+
+                <div class="text-rectangle">
+                    <p>
+                        <strong>my vision</strong><br><br>
+                        I am passionate about leveraging advanced techniques in data science and software development. <br><br>
+                        I enjoy learning how functional programming can optimize performance through efficient solutions.
+                        And, I am drawn to exploring big data frameworks such as Spark and Hadoop, as well as the scalability offered by cloud computing. <br><br>
+                        By combining rigorous testing methodologies with innovative visualizations, I aim to communicate complex data insights effectively to diverse audiences. 
+                        I want to heuristics to develop practical, adaptive solutions for real-world challenges.               
+                    </p>
+                </div>
+        </section>
+        
+
+
+        <section class="layer1" id="writing">
+            <div class="image-container">
+                <figure class="image-wrapper image1-wrapper">
+                    <!-- <img src="self.jpg" alt="Image 1" class="section-image image1"> -->
+                </figure>
+
+                <div class="text-rectangle">
+                    <p>
+                        <strong>current work</strong><br><br>
+                        I am currently focused on expanding my knowledge in optimization techniques, exploring both theoretical concepts and practical applications. As part of this learning journey, I have coded solutions to the Vehicle Routing Problem (VRP) and the Knapsack Problem, two classic challenges in the field of optimization. <br><br>
+                        These projects have allowed me to apply algorithms and heuristics to tackle complex decision-making scenarios, improving my skills in designing efficient, data-driven solutions. Through these experiences, I am gaining a deeper understanding of problem-solving strategies and computational tools that can optimize processes in real-world contexts.
+                    </p>
+                </div>
+        </section>
+
+
+
+    </div>
+</body>
+</html>

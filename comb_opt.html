@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About</title>
+    <link rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background: #efefef;
+            overflow-x: hidden;
+            height: 100vh; /* Ensure full height */
+            transition: overflow 0.3s ease;
+        }
+
+        /* Navbar styling */
+        nav {
+            background-color: transparent;
+            padding: 10px 20px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: right;
+            margin-right: 3vw;
+            margin-top: 1vw;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 1.2em;
+            font-weight: 500;
+        }
+
+        .layer1 {
+            background: url(/blob.svg) no-repeat center center;
+            background-size: cover; /* Cover the full viewport */
+            background-position: center;
+            min-height: 100vh; /* Ensure section fills at least 100% of viewport height */
+            background-size: 200%;
+            background-attachment: fixed;
+        }
+
+
+        .text {
+            font-size: 7.5em;
+            font-weight: 500;
+            letter-spacing: 0px;
+            font-family: 'Roboto', sans-serif;
+            white-space: nowrap;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header-content, .header-info, .about-main {
+            max-width: 1000px;
+            text-align: center;
+            margin: 10px auto;
+            margin-top: 0px; 
+        }
+
+        .header-info h2 {
+            margin-bottom: 5px;  /* Reduce space below the heading */
+        }
+
+        .header-title h1, .header-info h2 {
+            font-size: 3em;
+        }
+
+        .about-main {
+            font-size: 1.2em;
+            font-weight: 400;
+            line-height: 1.5;
+            max-width: 700px;
+            text-align: left;
+        }
+
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .images-container {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+
+        img {
+            max-width: 400px;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .content-wrapper {
+            position: absolute;
+            top: 100px;  /* Moves content down without affecting the background */
+            width: 100%;
+            text-align: left;
+        }
+
+
+        @media screen and (max-width: 768px) {
+            .text {
+                font-size: 5em; /* Smaller font size for tablets */
+            }
+
+            .layer1 {
+                background-image: none;
+                background-size: 500%;
+                background-repeat: no-repeat;
+                background-position: center;
+                background-attachment: fixed;
+            }
+            body {
+                overflow-x: hidden;
+            }
+
+            nav ul li a {
+                color: #820882;
+            }
+
+            .blog-posts-container {
+                flex-grow: 1; /* Allow blog posts to take remaining space */
+                display: flex;
+                flex-direction: column; /* Stack the articles vertically */
+                gap: 10px; /* Adds space between each article */
+                max-width: 100%;
+                box-sizing: border-box;
+            }
+
+            .blog-post {
+                padding: 0px;
+                background-color: transparent;
+                cursor: pointer; 
+                justify-content: center;
+            }
+
+            .blog-post h3 {
+                font-size: 40px; /* Adjust the font size as needed */
+                font-weight: 400; /* Adjust the font weight as needed */
+                margin-top: 5px;
+                margin-bottom: 20px;
+                justify-content: center;
+            }
+
+            .blog-post p {
+                font-size: 18px; /* Change to your desired font size */
+                font-weight: 400;
+                line-height: 1.5; /* Optional: Adjust line height for readability */
+                margin-bottom: 20px;
+            }
+
+            .blog-post p1 {
+                font-size: 15px; /* Change to your desired font size */
+                line-height: 1.5; /* Optional: Adjust line height for readability */
+            }
+
+            .filter-btn {
+                background-color: transparent;
+                border: transparent;
+                color: black;
+                cursor: pointer;
+                font-size: 20px; /* Larger font size */
+                font-weight: 400;
+            }
+
+
+            .filter-btn-container {
+                gap: 0px; /* Space between buttons in the same row */
+                margin-left: -15px;
+            }
+
+            .filter-buttons {
+                margin-left: -18px;
+                margin-bottom: 20px;
+            }
+
+        }
+
+        /* Media query for mobile screens */
+        @media screen and (max-width: 480px) {
+            .text {
+                font-size: 4em; /* Even smaller font size for mobile */
+            }
+            .layer1 {
+                background-image: none;
+                background-size: 500%;
+                background-repeat: no-repeat;
+                background-position: center;
+                background-attachment: fixed;
+            }
+
+            body {
+                overflow-x: hidden;
+            }
+
+            nav ul li a {
+                color: #820882;
+            }
+
+            .blog-posts-container {
+                flex-grow: 1; /* Allow blog posts to take remaining space */
+                display: flex;
+                flex-direction: column; /* Stack the articles vertically */
+                gap: 10px; /* Adds space between each article */
+                max-width: 100%;
+                box-sizing: border-box;
+            }
+
+            .blog-post {
+                padding: 0px;
+                background-color: transparent;
+                cursor: pointer; 
+                justify-content: center;
+            }
+
+            .blog-post h3 {
+                font-size: 40px; /* Adjust the font size as needed */
+                font-weight: 400; /* Adjust the font weight as needed */
+                margin-top: 5px;
+                margin-bottom: 20px;
+                justify-content: center;
+            }
+
+            .blog-post p {
+                font-size: 18px; /* Change to your desired font size */
+                font-weight: 400;
+                line-height: 1.5; /* Optional: Adjust line height for readability */
+                margin-bottom: 20px;
+            }
+
+            .blog-post p1 {
+                font-size: 15px; /* Change to your desired font size */
+                line-height: 1.5; /* Optional: Adjust line height for readability */
+            }
+
+            .filter-btn {
+                background-color: transparent;
+                border: transparent;
+                color: black;
+                cursor: pointer;
+                font-size: 20px; /* Larger font size */
+                font-weight: 400;
+            }
+
+
+            .filter-btn-container {
+                gap: 0px; /* Space between buttons in the same row */
+                margin-left: -15px;
+            }
+
+            .filter-buttons {
+                margin-left: -18px;
+                margin-bottom: 20px;
+            }
+        }
+    
+
+    </style>
+</head>
+
+<body>
+
+<section class="layer1">
+<nav>
+    <ul>
+        <li><a href="index.html">Index</a></li> <!-- Updated to trigger reload -->
+        <li><a href="projects.html">Projects</a></li>
+        <!-- <li><a href="projects.html">Writing</a></li> -->
+        <!-- <li><a href="projects.html">Personal</a></li> -->
+    </ul>
+</nav>
+    
+<section class="layer1">
+    <div class="content-wrapper">
+        <div class="header-info">
+            <h2>Applying Combinatorial Optimization</h2>
+            <p>November 1, 2024</p>
+            <p>    
+                <!-- <a href="https://github.com/noahc112/vehiclerouting" target="_blank">GitHub Link Here</a> -->
+            </p>
+        </div>
+
+        <div class="images-container">
+            <a href="contact.html"><img src="com_opt_plot.png" alt="Image 1"></a>
+        </div>
+
+        <main class="about-main">
+            <strong>Out of 317,520 possible paths, only 6 minimize distance traveled equally.</strong>
+            The vehicle routing problem defines n sites carrying an inventory that must be delivered back to the start point. 
+            In this rendition of the problem, 7 sites with a random inventory between 1 and 10 were placed randomly on a 100 by 100 grid.  
+        </main>
+        
+    </div>
+</section>
+
+
+<section class="layer1">
+</section>
+
+
+</section>
+</body>
+</html>
