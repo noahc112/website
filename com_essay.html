@@ -1,0 +1,27 @@
+<p>
+    To the college student sweating his last 10 dollars playing blackjack, be reminded that there are 300,433 ways to reach 21 with 1 deck of cards - assuming you are playing with 1 deck. <br><br>
+    And, for the Republicans outspent 2:1 by the Democrats in the 2024 election, the 20,637,567,393,575,328,676 unique combinations to reach 270 or more electoral college votes are plenty. <br><br>
+    The topic of counting and combinatorics can open a world where you can leverage strategy and optimization. In an effort to learn more about this subject, I explored two fundamental exercises in optimization: the vehicle routing problem and the knapsack problem. <br><br>
+    
+    <strong>The Vehicle Routing Problem</strong><br><br>
+    The experiment defines an arbitrary number of sites each with a given quantity of demand. Starting at the “distribution center”, the delivery vehicle, given a constraint of how many units it can carry, must find the path that services each site. <br><br>
+    In my approach to this problem, first I created all possible permutations of the path that the vehicle could take. Say we define the “distribution center” as point “a” and there are two sites “b” and “c”. All combinations of a, b, and c give us the paths: abc, acb, bac, bca, cba, and cab. <br><br>
+    The problem states that we must start and end at the distribution center, point “a”, so for each of the paths if they are not already starting or ending with an “a” we must add them to the beginning or end, or both. The updated paths become abca, acba, abaca, abca, acba, and acaba. <br><br>
+    In cases with more sites, additional considerations must be made where, the “distribution center”, site a, is visited multiple times in the middle before returning for the last time - for example, abacada. So integrated into the calculation, I make sure that I must get all the combinations of paths from 1 “a’’ all the way to the n, number of delivery sites, minus 1, so n-1 a’s. So, for the example with 3 sites, I get all the combinations of abcd and abcda. <br><br>
+    From this list, we must make sure all unnecessary paths are removed. So, we must remove the paths where a appears consecutively because there would be no use in repeating the “distribution center” if it is the previous point. <br><br>
+    In my example of the code, I set the number of sites as 7 and vehicle capacity as 15 units. The site locations were randomly generated onto a 100 by 100-grid, and the units per site were also generated randomly. <br><br>
+    I added the Euclidian distance between each point on each path, and out of 282,240 possible paths, only 8 minimized distance traveled equally. 
+    While I used this exercise, to explore the possibilities of permutations and optimization, more research can be done to explore how dividing the sites into clusters and sectors explains the path that the vehicle takes. Additional constraints can be added to the problem where the carrying loads can be exchanged between sites. <br><br>
+    
+    
+    <strong>Knapsack problem</strong>  <br><br>
+    Pretend there is a fire before you make your timely escape you line up all of your belongings with precise weights and prices for each item. The single bag you plan on making your escape with - imagine a plastic grocery store bag that will fail spectacularly if the weight threshold is surpassed - has an exact weight capacity. <br><br>
+    To solve this problem, I first created all possibilities of items. Say we have items a and b, all possibilities include only a, only b, and a bag with a and b. Then I removed all possibilities that surpassed the weight limit. And, then of all those possibilities, I chose the bag with the greatest cost. <br><br>
+    In my example, I generated 10 items with random weights and prices and I set the maximum capacity of the bag to 20. Out of 1,048,575, there was 1 combination that maximized the value of the carried in the bag. The average price of every bag that is below the max capacity is  19.396302975653743 and the value carried in the most valuable bag is 41. <br><br>
+    
+    
+    <strong>Reflections</strong><br><br>
+    As I reflect on the lessons learned from this exercise, I have come to see how important mathematical thinking can be to our daily livelihood. A basic understanding of math and computer programming is essential to making informed decisions. <br><br>
+    With the impending doom of climate disaster, nuclear war, and computer armageddon, mankind’s chances of survival feel slim. But remember even in the narrowest of margins, there are bountiful opportunities to explore. <br><br>
+    
+</p>
